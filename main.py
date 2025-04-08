@@ -4,8 +4,21 @@ EXIT_OPTION = 6
 movie_records = [] 
 
 def list_all_records():
-    # TODO (Pearl): implement listing all records in this funciton.
-    pass
+    print("\n---MOVIE RECORDS---")
+
+    if not movie_records:
+        print("No records found.")
+        return
+    
+    for record in movie_records:
+        print(f"Title: {record['title']}")
+        print(f"Year: {record['year']}")
+        print(f"Genre: {record['genre']}")
+        print(f"Rating: {record['rating']}")
+        print(f"Director: {record['direct']}")
+        print("--------------------")
+        
+    print("End of records.")
 
 def add_record():
     movie_title = input("\nEnter movie title: ").strip()
