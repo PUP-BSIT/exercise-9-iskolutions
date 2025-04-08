@@ -1,3 +1,5 @@
+UNSET_OPTION = -1
+EXIT_OPTION = 6
 def list_all_records():
     # TODO (Pearl): implement listing all records in this funciton.
     pass
@@ -18,7 +20,7 @@ def search_record():
     # TODO (Kyle): implement record searching in this function.
     pass
 
-def show_menu():
+def display_get_choice():
     print("---DATA RECORD MAIN MENU(MOVIES)---")
     print("1. List All")
     print("2. Add")
@@ -27,9 +29,9 @@ def show_menu():
     print("5. Search")
     print("6. Exit")
 
-    choice = input("Enter your choice: ")
-    choice = int(choice)
+    return int(input("Enter your choice: "))
 
+def process_choice(choice):
     match choice:
         case 1:
             list_all_records()
@@ -42,13 +44,15 @@ def show_menu():
         case 5:
             search_record()
         case 6:
-            # TODO (Miko): implement exit function here
             pass
         case _:
             print("Invalid choice. Please try again.")
 
 def main():
     # TODO (everyone): Call your functions here
-
-    show_menu()
-    pass
+    choice = UNSET_OPTION
+    while choice != EXIT_OPTION:
+        choice = display_get_choice()
+        process_choice(choice)
+        
+main()
