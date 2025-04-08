@@ -1,12 +1,42 @@
 UNSET_OPTION = -1
 EXIT_OPTION = 6
+
+movie_records = [] 
+
 def list_all_records():
     # TODO (Pearl): implement listing all records in this funciton.
     pass
 
 def add_record():
-    # TODO (Jakim): implement adding records in this function.
-    pass
+    movie_title = input("\nEnter movie title: ").strip()
+
+    year_input = (input("Enter year released: ")).strip()
+    if not year_input.isdigit():
+        print("Invalid input")
+        return
+    release_year = int(year_input)
+
+    genre = input("Enter movie genre: ").strip()
+    if genre == "":
+        print ("Invalid input")
+        return
+    
+    rating = float(input("Enter movie rating: "))
+
+    director = input("Enter movie director: ").strip()
+    if director == "":
+        print("Invalid input")
+
+    movie_record = {
+        "title": movie_title,
+        "year": release_year,
+        "genre": genre,
+        "rating": rating,
+        "direct": director,
+    }
+
+    movie_records.append(movie_record)
+    print("\nMovie record added succesfully.\n")
 
 def update_record():
     # TODO (Miko): implement updating record in this function.
