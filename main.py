@@ -1,7 +1,10 @@
+import os
+
 UNSET_OPTION = -1
 EXIT_OPTION = 6
 
 def list_all_records(movie_records):
+    os.system("cls")
     print("\n---MOVIE RECORDS---")
 
     if movie_records == []:
@@ -18,6 +21,7 @@ def list_all_records(movie_records):
     print("\nEnd of records.")
 
 def add_record(movie_records):
+    os.system("cls")
     input_list = ["title", "genre", "year", "rating", "director"]
     movie_record = {}
 
@@ -47,6 +51,7 @@ def is_valid_record(movie_record):
     return True
 
 def update_record(movie_records):
+    os.system("cls")
     list_all_records(movie_records)
     
     record_num = int(input("Enter a record to update: "))
@@ -65,7 +70,7 @@ def update_record(movie_records):
     print("\nUpdating record failed.")
     
 def delete_record(movie_records):
-    
+    os.system("cls")
     print("\n---DELETE MOVIE RECORD---")
 
     if not movie_records:
@@ -83,6 +88,7 @@ def delete_record(movie_records):
     print(f"No movie found with the title '{title_to_delete}'.")
 
 def get_search_field():
+    os.system("cls")
     search_fields = {
         "1": "title",
         "2": "genre",
@@ -105,6 +111,7 @@ def get_search_field():
     return field_choice, search_fields
 
 def search_record(movie_records):
+    os.system("cls")
     print("\n---SEARCH MOVIE RECORD---")
 
     field_choice, search_fields = get_search_field()
@@ -150,6 +157,7 @@ def process_choice(choice, movie_records):
         case 5:
             search_record(movie_records)
         case 6:
+            os.system("cls")
             pass
         case _:
             print("Invalid choice. Please try again.")
