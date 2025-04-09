@@ -1,53 +1,47 @@
 UNSET_OPTION = -1
 EXIT_OPTION = 6
 
-movie_records = [] 
-
-def list_all_records():
+def list_all_records(movie_records):
     print("\n---MOVIE RECORDS---")
 
-    if not movie_records:
+    if movie_records == []:
         print("No records found.")
         return
     
-    for record in movie_records:
-        print(f"Title: {record['title']}")
-        print(f"Year: {record['year']}")
-        print(f"Genre: {record['genre']}")
-        print(f"Rating: {record['rating']}")
-        print(f"Director: {record['direct']}")
-        print("--------------------")
+    for records in movie_records:
+        for key, value in records.items():
+            print(f"{key}: {value}")
         
     print("End of records.")
 
-def add_record():
-    input_list = ["title", "genre", "year", "rating", "direct"]
+def add_record(movie_records):
+    input_list = ["title", "genre", "year", "rating", "director"]
     movie_record = {}
 
     print("\n---ADD MOVIE RECORD---")
 
     for record in input_list:
-        user_input = input(f"Enter {record}: ")
+        movie_record[record] = input(f"Enter {record}: ")
 
-        if record == "year":
-            if not user_input.isdigit():
-                print(f"{user_input} must be an integer")
-                return
-                
-            movie_record[record] = int(user_input)
+    if is_valid_record(movie_record):
+        movie_record["year"] = int(movie_record["year"])
+        movie_record["rating"] = int(movie_record["rating"])    
+        movie_records.append(movie_record)
+        print("\nMovie record added successfully.")
+    
 
-        elif record == "rating":
-            try:
-                movie_record[record] = float(user_input)
-            except ValueError:
-                print(f"{user_input} must be a float number")
-                return
-            
-        else: 
-            movie_record[record] = user_input
+def is_valid_record(movie_record):
+    if not movie_record["year"].isdigit():
+        print("Year must be numeric! Aborting process.")
+        return False
 
-    movie_records.append(movie_record)
-    print("\nMovie record added successfully.")
+    try:
+        movie_record["rating"] = float(movie_record["rating"])
+    except ValueError:
+        print("Ratings must be numeric! Aborting process.")
+        return False
+    
+    return True
 
 def update_record():
     # TODO (Miko): implement updating record in this function.
@@ -62,7 +56,7 @@ def search_record():
     pass
 
 def display_get_choice():
-    print("---DATA RECORD MAIN MENU(MOVIES)---")
+    print("\n---DATA RECORD MAIN MENU(MOVIES)---")
     print("1. List All")
     print("2. Add")
     print("3. Update")
@@ -72,12 +66,12 @@ def display_get_choice():
 
     return int(input("Enter your choice: "))
 
-def process_choice(choice):
+def process_choice(choice, movie_records):
     match choice:
         case 1:
-            list_all_records()
+            list_all_records(movie_records)
         case 2:
-            add_record()
+            add_record(movie_records)
         case 3:
             update_record()
         case 4:
@@ -90,10 +84,10 @@ def process_choice(choice):
             print("Invalid choice. Please try again.")
 
 def main():
-    # TODO (everyone): Call your functions here
+    movie_records = []
     choice = UNSET_OPTION
     while choice != EXIT_OPTION:
         choice = display_get_choice()
-        process_choice(choice)
+        process_choice(choice, movie_records)
         
 main()
