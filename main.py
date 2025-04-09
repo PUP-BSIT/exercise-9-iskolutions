@@ -21,35 +21,33 @@ def list_all_records():
     print("End of records.")
 
 def add_record():
-    movie_title = input("\nEnter movie title: ").strip()
+    input_list = ["title", "genre", "year", "rating", "direct"]
+    movie_record = {}
 
-    year_input = (input("Enter year released: ")).strip()
-    if not year_input.isdigit():
-        print("Invalid input")
-        return
-    release_year = int(year_input)
+    print("\n---ADD MOVIE RECORD---")
 
-    genre = input("Enter movie genre: ").strip()
-    if genre == "":
-        print ("Invalid input")
-        return
-    
-    rating = float(input("Enter movie rating: "))
+    for record in input_list:
+        user_input = input(f"Enter {record}: ")
 
-    director = input("Enter movie director: ").strip()
-    if director == "":
-        print("Invalid input")
+        if record == "year":
+            if not user_input.isdigit():
+                print(f"{user_input} must be an integer")
+                return
+                
+            movie_record[record] = int(user_input)
 
-    movie_record = {
-        "title": movie_title,
-        "year": release_year,
-        "genre": genre,
-        "rating": rating,
-        "direct": director,
-    }
+        elif record == "rating":
+            try:
+                movie_record[record] = float(user_input)
+            except ValueError:
+                print(f"{user_input} must be a float number")
+                return
+            
+        else: 
+            movie_record[record] = user_input
 
     movie_records.append(movie_record)
-    print("\nMovie record added succesfully.\n")
+    print("\nMovie record added successfully.")
 
 def update_record():
     # TODO (Miko): implement updating record in this function.
