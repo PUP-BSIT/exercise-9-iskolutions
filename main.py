@@ -51,9 +51,7 @@ def delete_record():
     # TODO (Hanz): implement deleting records in this function.
     pass
 
-def search_record(movie_records):
-    print("\n---SEARCH MOVIE RECORD---")
-    
+def get_search_field():
     search_fields = {
         "1": "title",
         "2": "genre",
@@ -73,18 +71,26 @@ def search_record(movie_records):
         if field_choice not in search_fields:
             print("\nInvalid choice")
     
+    return field_choice, search_fields
+
+def search_record(movie_records):
+    print("\n---SEARCH MOVIE RECORD---")
+
+    field_choice, search_fields = get_search_field()
+    
     search_field = search_fields[field_choice]
     search_value = input(f"Enter the {search_field}: ").lower()
 
+    print("\nMovies Found")
     is_found = False
+    
     for record in movie_records:
         if search_value == str(record[search_field]).lower():
-            if not is_found:
-                print("\nMovies Found")
-                is_found = True
             print("\n---Movie Found---")
             for key, value in record.items():
                 print(f"{key}: {value}")
+            
+            is_found = True
     
     if not is_found:
         print(f"\nNo movies found with the {search_field}: {search_value}")
