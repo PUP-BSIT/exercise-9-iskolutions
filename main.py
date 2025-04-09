@@ -8,11 +8,14 @@ def list_all_records(movie_records):
         print("No records found.")
         return
     
+    count = 1
     for records in movie_records:
+        print(f"\nMovie #{count}:")
+        count += 1
         for key, value in records.items():
-            print(f"{key}: {value}")
+            print(f"{key}:   \t{value}")
         
-    print("End of records.")
+    print("\nEnd of records.")
 
 def add_record(movie_records):
     input_list = ["title", "genre", "year", "rating", "director"]
