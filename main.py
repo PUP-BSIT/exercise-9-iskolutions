@@ -54,7 +54,7 @@ def update_record(movie_records):
     os.system("cls")
     list_all_records(movie_records)
     
-    record_num = int(input("Enter a record to update: "))
+    record_num = int(input("Enter the movie number to update: "))
     record = movie_records[record_num - 1] # for zero indexing
     
     for field in record:
