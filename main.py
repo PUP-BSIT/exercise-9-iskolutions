@@ -51,9 +51,43 @@ def delete_record():
     # TODO (Hanz): implement deleting records in this function.
     pass
 
-def search_record():
-    # TODO (Kyle): implement record searching in this function.
-    pass
+def search_record(movie_records):
+    print("\n---SEARCH MOVIE RECORD---")
+    
+    search_fields = {
+        "1": "title",
+        "2": "genre",
+        "3": "year",
+        "4": "rating",
+        "5": "director"
+    }
+
+    field_choice = UNSET_OPTION
+
+    while field_choice not in search_fields:
+        for key, value in search_fields.items():
+            print(f"{key}. {value}")
+
+        field_choice = input("Enter the number you want to search: ")
+
+        if field_choice not in search_fields:
+            print("\nInvalid choice")
+    
+    search_field = search_fields[field_choice]
+    search_value = input(f"Enter the {search_field}: ").lower()
+
+    is_found = False
+    for record in movie_records:
+        if search_value == str(record[search_field]).lower():
+            if not is_found:
+                print("\nMovies Found")
+                is_found = True
+            print("\n---Movie Found---")
+            for key, value in record.items():
+                print(f"{key}: {value}")
+    
+    if not is_found:
+        print(f"\nNo movies found with the {search_field}: {search_value}")
 
 def display_get_choice():
     print("\n---DATA RECORD MAIN MENU(MOVIES)---")
@@ -77,7 +111,7 @@ def process_choice(choice, movie_records):
         case 4:
             delete_record()
         case 5:
-            search_record()
+            search_record(movie_records)
         case 6:
             pass
         case _:
