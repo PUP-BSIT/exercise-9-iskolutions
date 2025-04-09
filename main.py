@@ -46,10 +46,24 @@ def is_valid_record(movie_record):
     
     return True
 
-def update_record():
-    # TODO (Miko): implement updating record in this function.
-    pass
-
+def update_record(movie_records):
+    list_all_records(movie_records)
+    
+    record_num = int(input("Enter a record to update: "))
+    record = movie_records[record_num - 1] # for zero indexing
+    
+    for field in record:
+        record[field] = input(f"Enter {field}: ")
+    
+    if is_valid_record(record):
+        record["year"] = int(record["year"])
+        record["rating"] = float(record["rating"]) 
+        movie_records[record_num - 1] = record # Change old record to new one
+        print("\nRecord updated successfully")
+        return
+    
+    print("\nUpdating record failed.")
+    
 def delete_record(movie_records):
     
     print("\n---DELETE MOVIE RECORD---")
@@ -130,9 +144,9 @@ def process_choice(choice, movie_records):
         case 2:
             add_record(movie_records)
         case 3:
-            update_record()
+            update_record(movie_records)
         case 4:
-            delete_record()
+            delete_record(movie_records)
         case 5:
             search_record(movie_records)
         case 6:
