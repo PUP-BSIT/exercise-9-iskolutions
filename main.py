@@ -25,7 +25,7 @@ def add_record(movie_records):
 
     if is_valid_record(movie_record):
         movie_record["year"] = int(movie_record["year"])
-        movie_record["rating"] = int(movie_record["rating"])    
+        movie_record["rating"] = float(movie_record["rating"])    
         movie_records.append(movie_record)
         print("\nMovie record added successfully.")
     
