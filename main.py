@@ -47,9 +47,23 @@ def update_record():
     # TODO (Miko): implement updating record in this function.
     pass
 
-def delete_record():
-    # TODO (Hanz): implement deleting records in this function.
-    pass
+def delete_record(movie_records):
+    
+    print("\n---DELETE MOVIE RECORD---")
+
+    if not movie_records:
+        print("No records to delete.")
+        return
+
+    title_to_delete = input("Enter the title of the movie to delete: ")
+
+    for record in movie_records:
+        if record["title"].lower() == title_to_delete.lower():
+            movie_records.remove(record)
+            print(f"Movie '{title_to_delete}' has been deleted.")
+            return
+
+    print(f"No movie found with the title '{title_to_delete}'.")
 
 def get_search_field():
     search_fields = {
